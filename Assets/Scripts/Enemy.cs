@@ -24,11 +24,16 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         // calculate the distance between the enemy and the player
-        
         Vector3 direction = (player.position - transform.position).normalized;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         rb.rotation = angle;
-        moveDirection = direction;     
+        moveDirection = direction; 
+
+        //kill enemy when they are dead :)
+        if(health <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
     void FixedUpdate()
     {
@@ -41,16 +46,26 @@ public class Enemy : MonoBehaviour
             // if the player is within the attack range and the attack cooldown has elapsed, attack them
             if (distanceToPlayer <= attackRange && Time.time >= lastAttackTime + attackCooldown)
             {
+                Debug.Log("attacking player");
                 //Attack();
                 lastAttackTime = Time.time;
             }
         }
     }
-
-    public void Die()
+    public void Hit()
     {
-       
+        Debug.Log("I was hit");
+        health -= 25;
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.tag == "Bullet")
+        {
+            Hit();
+        }
+    }
+    
 
     // void Attack()
     //{
