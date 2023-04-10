@@ -42,14 +42,6 @@ public class Enemy : MonoBehaviour
         if (distanceToPlayer <= chaseRange)
         {
             rb.velocity = new Vector2(moveDirection.x, moveDirection.y) * speed;
-
-            // if the player is within the attack range and the attack cooldown has elapsed, attack them
-            if (distanceToPlayer <= attackRange && Time.time >= lastAttackTime + attackCooldown)
-            {
-                Debug.Log("attacking player");
-                //Attack();
-                lastAttackTime = Time.time;
-            }
         }
     }
     public void Hit()
@@ -66,12 +58,5 @@ public class Enemy : MonoBehaviour
         }
     }
     
-
-    // void Attack()
-    //{
-    // do damage to the player
-    //    PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
-    //playerHealth.TakeDamage(damage);
-    // }
 }
 
