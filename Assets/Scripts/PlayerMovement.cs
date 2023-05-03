@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
     public float damage = 10;
     private void Awake()
     {
-        playerHealth = 100;
+        playerHealth = 1;
     }
     void Start()
     {
